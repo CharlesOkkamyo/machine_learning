@@ -5,7 +5,7 @@ import pandas as pd
 st.title('Final Project of Google Stocks Prediction and Machine Learning')
 
 Date = 'date'
-dat2 = pd.read_csv(r'C:\Users\Charles\Downloads\google-stock-dataset-Daily.csv.')
+dat2 = pd.read_csv(r'\google-stock-dataset-Daily.csv.')
 
 def load_data(nrows):
     data = pd.read_csv(r'C:\Users\Charles\Downloads\google-stock-dataset-Daily.csv.', nrows=nrows)
