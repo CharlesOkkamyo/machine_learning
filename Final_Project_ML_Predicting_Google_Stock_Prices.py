@@ -1,7 +1,24 @@
 import streamlit as st
-import pandas as pd
-import numpy as np
-import statsmodels as sm
+import numpy as np 
+import pandas as pd 
+import matplotlib.pyplot as plt
 
-st.title('Uber pickups in NYC')
-data = pd.read_csv('google_stock_data.csv', index_col='Date', parse_dates=True)
+st.title('Final Project of Google Stocks Prediction and Machine Learning')
+
+Date = 'date'
+dat2 = pd.read_csv(r'C:\Users\Charles\Downloads\google-stock-dataset-Daily.csv.')
+
+def load_data(nrows):
+    data = pd.read_csv(r'C:\Users\Charles\Downloads\google-stock-dataset-Daily.csv.', nrows=nrows)
+    lowercase = lambda x: str(x).lower()
+    data.rename(lowercase, axis='columns', inplace=True)
+    data[Date] = pd.to_datetime(data[Date])
+    return data
+
+data_load_state = st.text('Loading data...')
+training_data = load_data(10000)
+data_load_state.text('Loading data...done!')
+
+hist_values = np.histogram(
+    training_data[Date].dt.hour, bins=24, range=(0,24))[0]
+st.bar_chart(hist_values)
