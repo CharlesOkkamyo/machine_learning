@@ -7,7 +7,7 @@ st.title('Final Project of Google Stocks Prediction and Machine Learning')
 Date = 'date'
 
 def load_data(nrows):
-    data = pd.read_csv('google-stock-dataset-Daily.csv.')
+    data = pd.read_csv('\\google-stock-dataset-Daily.csv.')
     lowercase = lambda x: str(x).lower()
     data.rename(lowercase, axis='columns', inplace=True)
     data[Date] = pd.to_datetime(data[Date])
