@@ -1,0 +1,28 @@
+name: Publish Changes
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Export Dynamics Solution
+      id: export-dynamics-solution
+      uses: dynamics-tools/export-managed-solution@v1.0.0
+      with:
+        dynamics-url: secrets.DYNAMICS_URL
+        application-id: secrets.APPLICATION_ID
+        application-secret: secrets.APPLICATION_SECRET
+        tenant-id: secrets.TENANT_ID
+        solution-name: 'MySolution'
+
+    - name: Use the output
+      run: |
+        echo "The file path of the exported solution is ${{ steps.export-dynamics-solution.outputs.exported_file_path }}"
+        echo "The base64 encoded data of the exported solution is ${{ steps.export-dynamics-solution.outputs.exported_file_base64 }}"
